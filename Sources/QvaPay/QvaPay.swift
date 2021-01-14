@@ -38,7 +38,7 @@ class QvaPayApi {
         task.resume()
     }
     
-    func getTransactions(completion: @escaping (_ DataResponse: TransactionResponse)-> Void) -> TransactionResponse{
+    func getTransactions(completion: @escaping (_ DataResponse: TransactionResponse)-> Void) {
         guard let url = URL(string: self.urlBasic + "transactions?app_id=\(self.app_id)&app_secret=\(self.app_secret)") else { return }
         
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)

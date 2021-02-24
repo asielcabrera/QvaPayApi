@@ -1,5 +1,5 @@
 import XCTest
-@testable import QvaPay
+@testable import QvaPayApi
 
 final class QvaPayTests: XCTestCase {
     func testExample() {

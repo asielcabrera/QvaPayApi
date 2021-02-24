@@ -7,9 +7,9 @@
 
 import Foundation
 
-let credentials: Credentials = load("credentials.json")
+public let credentials: Credentials = load("credentials.json")
 
-func load<T:Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
+public func load<T:Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil) else {
         fatalError("No se pudo encontrar \(filename) en el main bundle.")
@@ -28,7 +28,16 @@ func load<T:Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     }
 }
 
-struct Credentials:  Codable, Hashable {
-    var app_id: String
-    var app_secrect: String
+public struct Credentials:  Codable, Hashable {
+    public var app_id: String
+    public var app_secrect: String
+}
+
+
+public func loadContentForLogin() -> NSDictionary?{
+    var nsDic: NSDictionary?
+    if let path = Bundle.main.path(forResource: "config", ofType: "plist"){
+        nsDic = NSDictionary(contentsOfFile: path)
+    }
+    return nsDic
 }

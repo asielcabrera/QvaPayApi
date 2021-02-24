@@ -1,7 +1,5 @@
 
 [![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
-[![License][license-image]][license-url]
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 # QvaPayApi
@@ -38,47 +36,67 @@ Puedes usar [Swift Package](http://cocoapods.org/) para instalar `QvaPayApi` con
 https://github.com/asielcabrera/QvaPayApi.git
 ```
 
-To get the full benefits import `YourLibrary` wherever you import UIKit
+To get the full benefits import `QvaPay` wherever you import UIKit
 
 ``` swift
 import UIKit
-import QvaPayApi
+import QvaPay
 ```
 #### Manually
 1. Download and drop ```QvaPay.swift``` in your project.  
 2. Congratulations!  
 
 ## Usage example
+First import a credentials.plis inside your proyect and them..
+
 
 ```swift
 import QvaPay
-var qvpay = QvaPayApi()
-
-qvpay.getTransaction { transactions in
-
-    // hacer algo con las transacciones que te devuelve
-    // qvapay
+struct QvaPayViewExample: View {
+    @StateObject private var qvpay: QvaPayApiNetwork = QvaPayApiNetwork()
     
-}
+    var body: some View {
+        return VStack ( spacing: 10){
+            if let data = qvpay.MerchandInfo {
+                VStack(spacing: 15){
+                    Text(data.name)
+                    Text(data.uuid)
+                    Text(data.desc)
+                }
+                VStack {
+                   if let trans: Transaction = qvpay.transactions {
+                       List(trans){ tra in
+                            Text(tra.total)
+                        }
+                    }
+                    Text("BALANCE -- \(self.qvpay.Balance)")
+                    
+                    Button {
+                        self.qvpay.getTransactions()
+                        print(self.qvpay.transactions as Any)
+                    } label: {
+                        Text("Get Transaction")
+                    }.padding()
+                    .buttonStyle(PlainButtonStyle())
+                    .background(Color.blue.opacity(0.7))
+                    .cornerRadius(10)
 
-var invoice: invoiceRequest = invoiceRequest(app_id, app_secret, amount, description, remote_id, signed)
-
-qvpay.createInvoice(invoice: invoice){ responseData in
-
-    // hacer lo que desees con la respuesta de qvapay
-
-}
-
-qvpay.getInfo { info in
-
-    // hacer algo con la info que devuelve qvapay
-    
-}
-
-qvpay.getBalance { balance in
-
-    // hacer algo con el balance devuelto por qvapay
-    
+                    Button {
+                        self.qvpay.createInvoice(invoice: InvoiceRequest(amount: 45, description: "prueba numero uno"))
+                        print("invoice")
+                    } label: {
+                        Text("Invoice")
+                    }.padding()
+                    .buttonStyle(PlainButtonStyle())
+                    .background(Color.blue.opacity(0.7))
+                    .cornerRadius(10)
+                }
+                
+            } else {
+                Text("done")
+            }
+        }
+    }
 }
 
 ```

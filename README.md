@@ -39,11 +39,11 @@ https://github.com/asielcabrera/QvaPayApi.git
 To get the full benefits import `QvaPay` wherever you import UIKit
 
 ``` swift
-import UIKit
+import SwiftUI
 import QvaPay
 ```
 #### Manually
-1. Download and drop ```QvaPay.swift``` in your project.  
+1. Download and drop ```credentials.json``` with the content {"app_id":"token_app_id", "app_secrect": "your_token_app_secrect" } in your project.  
 2. Congratulations!  
 
 ## Usage example

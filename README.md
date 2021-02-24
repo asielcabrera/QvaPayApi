@@ -107,7 +107,7 @@ We would love you for the contribution to **QvaPayApi**, check the ``LICENSE`` f
 
 ## Meta
 
-Your Name – [@asiel_cabrera](https://twitter.com/asiel_cabrera) – cabrerasiel@gmail.com
+Asiel Cabrera – [@asiel_cabrera](https://twitter.com/asiel_cabrera) – cabrerasiel@gmail.com
 
 Distributed under the XYZ license. See ``LICENSE`` for more information.
 
